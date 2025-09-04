@@ -1,0 +1,67 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --sidebar-bg: #1e3a8a; 
+  --sidebar-text: #ffffff;
+  --card-bg: #f9f9f9;
+  --icon-color: #000000; 
+  --ico-bg: #ffffff;
+  --search-bg: #ffffff;
+  --card-sub-color:#000000;
+
+}
+
+body.dark-mode {
+  --bg-color: #121212; 
+  --text-color: #e4e4e4; 
+  --sidebar-bg: #1f2937; 
+  --sidebar-text: #e4e4e4;
+  --card-bg: #1e1e2f; 
+  --ico-bg: #121212; 
+  --icon-color: #ffffff; 
+  --search-bg: #121212; 
+  --card-sub-color: #ffffff;
+
+
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* LeftSide */
+.LeftSide {
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+}
+
+/* Links */
+.LeftSide ul li a {
+  color: var(--sidebar-text);
+}
+
+/* RightSide */
+.RightSide {
+  background: var(--bg-color);
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.profile button {
+  color: var(--icon-color);
+  background-color: var(--ico-bg);
+}
+
+.search {
+  background-color: var(--search-bg);
+}
+h6 .card-subtitle{
+  color: var(--card-sub-color);
+}
+

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posts Dashboard</title>
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Toastr CSS & JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <!-- animatio -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+
+  
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    h2 { margin-bottom: 20px; }
+    #searchPost { padding: 5px; margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 10px; text-align: left; }
+    button { margin: 0 3px; padding: 5px 10px; cursor: pointer; }
+    #postModal, #commentsModal {
+      display: none;
+      position: fixed;
+      top: 20%; left: 50%; transform: translateX(-50%);
+      background: #fff; padding: 20px; border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    #postModal input, #postModal textarea {
+      display: block; width: 100%; margin-bottom: 10px; padding: 5px;
+    }
+    body{
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="posts-container">
+    <h2 class="animate__animated animate__bounceInUp">Posts</h2>
+    <input type="text" id="searchPost" placeholder="Search posts...">
+    <button id="addPostBtn">+ Add Post</button>
+    
+    <table id="postsTable" class="animate__animated animate__fadeInUpBig">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Body</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="postModal">
+    <h3 id="modalTitle">Add Post</h3>
+    <input type="hidden" id="postId">
+    <input type="text" id="postTitle" placeholder="Title">
+    <textarea id="postBody" placeholder="Body"></textarea>
+    <button id="savePost">Save</button>
+    <button onclick="$('#postModal').hide()">Close</button>
+  </div>
+
+  <!-- Comments Modal -->
+  <div id="commentsModal">
+    <h3>Comments</h3>
+    <ul id="commentsList"></ul>
+    <button onclick="$('#commentsModal').hide()">Close</button>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      let posts = [];
+
+      // Toastr settings
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right"
+      };
+
+      // Fetch posts from API
+      $.get("https://jsonplaceholder.typicode.com/posts", function (data) {
+        posts = data;
+        renderPosts(posts);
+      });
+
+      // Render posts
+      function renderPosts(posts) {
+        let rows = "";
+        posts.forEach(post => {
+          rows += `
+          <tr>
+              <td>${post.id}</td>
+              <td>${post.title}</td>
+              <td>${post.body}</td>
+              <td>
+                  <button class="editBtn" data-id="${post.id}">Edit</button>
+                  <button class="deleteBtn" data-id="${post.id}">Delete</button>
+                  <button class="commentsBtn" data-id="${post.id}">Comments</button>
+              </td>
+          </tr>`;
+        });
+        $("#postsTable tbody").html(rows);
+      }
+
+      // Live search
+      $("#searchPost").on("keyup", function () {
+        let value = $(this).val().toLowerCase();
+        let filtered = posts.filter(p => p.title.toLowerCase().includes(value));
+        renderPosts(filtered);
+      });
+
+      // Open add post modal
+      $("#addPostBtn").click(function () {
+        $("#modalTitle").text("Add Post");
+        $("#postId").val("");
+        $("#postTitle").val("");
+        $("#postBody").val("");
+        $("#postModal").show();
+      });
+
+      // Save post (Add/Edit)
+      $("#savePost").click(function () {
+        let id = $("#postId").val();
+        let title = $("#postTitle").val();
+        let body = $("#postBody").val();
+
+        if (!title || !body) {
+          toastr.error("Please fill all fields");
+          return;
+        }
+
+        if (id) {
+          // Edit
+          let post = posts.find(p => p.id == id);
+          post.title = title;
+          post.body = body;
+          toastr.success("Post updated!");
+        } else {
+          // Add
+          let newPost = { id: posts.length + 1, title, body };
+          posts.unshift(newPost);
+          toastr.success("Post added!");
+        }
+
+        renderPosts(posts);
+        $("#postModal").hide();
+      });
+
+      // Edit post
+      $(document).on("click", ".editBtn", function () {
+        let id = $(this).data("id");
+        let post = posts.find(p => p.id == id);
+        $("#modalTitle").text("Edit Post");
+        $("#postId").val(post.id);
+        $("#postTitle").val(post.title);
+        $("#postBody").val(post.body);
+        $("#postModal").show();
+      });
+
+      // Delete post
+      $(document).on("click", ".deleteBtn", function () {
+        let id = $(this).data("id");
+        posts = posts.filter(p => p.id !== id);
+        renderPosts(posts);
+        toastr.success("Post deleted!");
+      });
+
+      // Show comments
+      $(document).on("click", ".commentsBtn", function () {
+        let id = $(this).data("id");
+        $.get(`https://jsonplaceholder.typicode.com/comments?postId=${id}`, function (comments) {
+          let list = "";
+          comments.forEach(c => {
+            list += `<li><strong>${c.name}</strong>: ${c.body}</li>`;
+          });
+          $("#commentsList").html(list);
+          $("#commentsModal").show();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

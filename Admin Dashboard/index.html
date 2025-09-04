@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <!-- animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- external File CSS -->
+  <link rel="stylesheet" href="CSS/style.css">
+  <!-- external File CSS -->
+  <link rel="stylesheet" href="CSS/color.css">
+  <title>Admin Dashboard</title>
+</head>
+
+<body>
+
+  <div class="container">
+
+
+    <!-- Left Side -->
+    <div class="LeftSide ">
+
+      <ul class="animate__animated animate__pulse">
+        <!-- Brand Name -->
+        <li class="brand">
+          <i class="fa-solid fa-laptop"></i>
+          <a href="#">Brand</a>
+        </li>
+        <!-- DashBoard -->
+        <li class="nav-item active">
+          <i class="fa-solid fa-house"></i>
+          <a class="nav-link" href="#" data-target="dashboard-section">Dashboard</a>
+        </li>
+        <!-- users -->
+        <li class="nav-item">
+          <i class="fa-solid fa-users"></i>
+          <a class="nav-link" href="#" data-target="users-section">Users</a>
+        </li>
+        <!-- Posts -->
+        <li class="nav-item">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <a class="nav-link" href="#" data-target="posts-section">Posts</a>
+        </li>
+
+        <!-- Favourite -->
+        <li class="nav-item">
+          <i class="fa-solid fa-star"></i>
+          <a class="nav-link" href="#" data-target="favourites-section">Favourites</a>
+        </li>
+        <!-- Settings -->
+        <li class="nav-item">
+          <i class="fa-solid fa-gear"></i>
+          <a class="nav-link" href="#">Setting</a>
+        </li>
+        <!-- contact -->
+        <li class="nav-item">
+          <i class="fa-solid fa-phone"></i>
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+        <!-- sign out -->
+        <li class="nav-item-signout">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <a class="nav-link" href="#">Sign Out</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="RightSide">
+
+      <div class="topbar animate__animated animate__backInUp">
+          <!-- ===========toggle======= -->
+          <div class="toggle">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+          <!-- ==========search======= -->
+          <div class="search">
+            <nav class="navbar ">
+              <div class="container-fluid">
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                    style="width: 450px;" />
+                  <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+              </div>
+            </nav>
+          </div>
+          <!-- ===========dark mode===== -->
+          <div class="dark">
+            <button id="modeToggle" class="btn btn-outline-dark">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+
+          </div>
+          <!-- =========profile -->
+          <div class="profile">
+            <button><i class="fa-solid fa-user"></i></button>
+          </div>
+        </div>
+
+      <div id="dashboard-section">
+        
+        <!-- ==================cards========== -->
+
+        <div class="cardBox container">
+          <div class="row g-3">
+
+            <!-- =========card1====== -->
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3 class="card-title animate__animated animate__backInLeft">Users</h3>
+                  <h6 class="card-subtitle mb-2 ">Total registered users</h6>
+                  <p class="users-count">
+                    0
+                  </p>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- ===============card2============== -->
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3 class="card-title animate__animated animate__backInLeft">Comments</h3>
+                  <h6 class="card-subtitle mb-2 ">All comments from posts</h6>
+                  <p class="comment-count">
+                    0.
+                  </p>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- ================card3============== -->
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3 class="card-title animate__animated animate__backInLeft">Posts</h3>
+                  <h6 class="card-subtitle mb-2 ">Number of published posts</h6>
+                  <p class="post-count">
+                    0
+                  </p>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Section: Table + Chart -->
+<div class="row mt-5">
+
+  <!-- Left Side: Latest Users Table -->
+  <div class="col-md-6">
+    <h4>Latest Users</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Leanne Graham</td>
+          <td>leanne@example.com</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Ervin Howell</td>
+          <td>ervin@example.com</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Clementine Bauch</td>
+          <td>clementine@example.com</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Patricia Lebsack</td>
+          <td>patricia@example.com</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Chelsey Dietrich</td>
+          <td>chelsey@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Right Side: Chart -->
+  <div class="col-md-6">
+    <h4>Users Activity</h4>
+    <canvas id="usersChart"></canvas>
+  </div>
+
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('usersChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Active Users', 'Inactive Users'],
+      datasets: [{
+        data: [70, 30], // example values
+        backgroundColor: ['#4caf50', '#f44336'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+        }
+      }
+    }
+  });
+</script>
+
+
+          
+        </div>
+        
+
+
+
+      </div>
+
+      <!-- Users Section -->
+      <div id="users-section" style="display: none; height:100%;">
+        <iframe src="users.html" style="width:100%; height:100vh; border:none;"></iframe>
+      </div>
+
+      <!-- Favourites Section -->
+      <div id="favourites-section" style="display: none; height:100%;">
+        <iframe src="favourites.html" style="width:100%; height:100vh; border:none;"></iframe>
+      </div>
+
+      <!-- Posts Section -->
+      <div id="posts-section" style="display: none; height:100%;">
+        <iframe src="posts.html" style="width:100%; height:100vh; border:none;"></iframe>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- External File JS -->
+  <script src="JS/main.js"></script>
+
+  <!-- BootStrapl -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Charts -->
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+
+</html>

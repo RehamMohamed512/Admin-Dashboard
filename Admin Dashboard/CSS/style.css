@@ -1,0 +1,160 @@
+  * {
+      font-family: 'Times New Roman', Times, serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+  body {
+      min-height: 100vh;
+      overflow-x: hidden;
+  }
+
+  .container {
+      position: relative;
+      display: flex;
+      width: 100%;
+  }
+
+
+  /* ==============================Left Side======================= */
+  .LeftSide {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100%;
+      background-color: darkblue;
+      color: white;
+      padding-top: 10px;
+      transition: all 0.5s ease-in-out;
+      overflow: hidden;
+      border-radius: 30px;
+  }
+
+  .LeftSide.active {
+      width: 79px;
+  }
+
+  .LeftSide ul {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding-top: 25px;
+  }
+
+  .LeftSide ul li {
+      position: relative;
+      width: 100%;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 15px;
+
+  }
+
+  .LeftSide ul li:hover {
+      background-color: white;
+      color: darkblue;
+      border-top-left-radius: 30px;
+  }
+
+
+  .LeftSide ul li:hover a {
+
+      color: darkblue;
+  }
+
+  .LeftSide ul li a {
+      position: relative;
+      display: block;
+      width: 100%;
+      display: flex;
+      text-decoration: none;
+      color: white;
+  }
+
+  .LeftSide ul li.active {
+      background-color: white;
+      color: darkblue;
+      border-top-left-radius: 30px;
+      width: 100%;
+      transform: scale(1.06)
+  }
+
+  .LeftSide ul li.active a {
+      color: darkblue;
+      font-weight: bold;
+  }
+
+  .LeftSide ul li a .fa-solid {
+      position: relative;
+      display: block;
+      min-width: 60px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+  }
+
+  /* brand */
+  .LeftSide .brand {
+      font-size: 25px;
+      right: 15px;
+      margin-bottom: 40px;
+      pointer-events: none;
+  }
+
+  /* ===================Right Side========================= */
+  .RightSide {
+      position: absolute;
+      width: calc(100% - 300px);
+      left: 200px;
+      min-height: 100vh;
+      background: white;
+      transition: 0.5s;
+  }
+    .RightSide.active{
+        width: calc(100% - 80px);
+        left: 20px;
+    }
+
+  .topbar {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .toggle {
+      font-size: 1.5rem;
+      cursor: pointer;
+  }
+
+  .profile button {
+      border: none;
+      font-size: 1.5rem;
+
+
+  }
+/* =================Cards================= */
+  .cardBox{
+    display: grid;
+    margin-top: 80px;
+
+  
+  }
+  .card{
+ 
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
+     border-radius: 15px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  }
+ 
+  .card:hover{
+          transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
